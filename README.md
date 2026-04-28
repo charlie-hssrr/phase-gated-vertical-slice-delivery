@@ -55,3 +55,9 @@ Build each phase through vertical slices:
 ## One-line summary
 
 Phase-Gated Vertical Slice Delivery is a phase-gated, slice-driven delivery system for turning ambiguous technical specs into controlled, reviewable, production-grade implementation.
+
+## Examples
+
+- [Example delivery plan](docs/examples/example-delivery-plan.md)
+- [Example phase tracker](docs/examples/example-phase-tracker.md)
+- [Example gate tracker](docs/examples/example-gate-tracker.md)
