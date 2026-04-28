@@ -61,3 +61,4 @@ Phase-Gated Vertical Slice Delivery is a phase-gated, slice-driven delivery syst
 - [Example delivery plan](docs/examples/example-delivery-plan.md)
 - [Example phase tracker](docs/examples/example-phase-tracker.md)
 - [Example gate tracker](docs/examples/example-gate-tracker.md)
+- [Example case study](docs/examples/case-study-connectors.md)
