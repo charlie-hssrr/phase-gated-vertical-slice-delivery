@@ -155,6 +155,56 @@
   .gist-gate{margin-top:14px;font-family:var(--mono);font-size:12px;color:var(--ink);border-left:3px solid var(--C);padding-left:12px;line-height:1.5}
   .gist-gate b{color:var(--C)}
 
+  /* ---------- START HERE ROUTER + PIPELINE ---------- */
+  .starthere{padding:44px 0;border-bottom:1px solid var(--hair)}
+  .starthere .lab{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:20px}
+  .router{border:1px solid var(--ink)}
+  .router .route{display:grid;grid-template-columns:minmax(180px,1fr) 1.6fr;gap:24px;align-items:center;
+    padding:18px 22px;border-bottom:1px solid var(--hair);text-decoration:none;color:inherit;
+    transition:background .2s;position:relative}
+  .router .route:last-child{border-bottom:none}
+  .router .route::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;transform:scaleY(0);transition:transform .25s}
+  .router .route:hover{background:rgba(255,255,255,.28)}
+  .router .route:hover::before{transform:scaleY(1)}
+  .router .route.new::before{background:var(--A)}
+  .router .route.poc::before{background:var(--B)}
+  .router .route.one::before{background:var(--C)}
+  .router .cond{font-family:var(--serif);font-size:17px;color:var(--ink)}
+  .router .cond b{font-weight:600}
+  .router .path{display:flex;flex-wrap:wrap;align-items:center;gap:7px;font-family:var(--mono);font-size:12.5px;color:var(--ink-soft)}
+  .router .path .p{border:1px solid var(--hair);padding:5px 9px;letter-spacing:.03em;white-space:nowrap}
+  .router .route.new .path .p{border-color:var(--A);color:var(--A)}
+  .router .route.poc .path .p{border-color:var(--B);color:var(--B)}
+  .router .route.one .path .p{border-color:var(--C);color:var(--C)}
+  .router .path .ar{color:var(--ink-faint)}
+  .router .route .go{font-family:var(--mono);font-size:11px;color:var(--ink-faint);transition:color .2s}
+  .router .route:hover .go{color:var(--C)}
+
+  .pipe-wrap{margin-top:30px}
+  .pipe-wrap .plab{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:14px}
+  .pipe{display:flex;flex-wrap:wrap;align-items:stretch;gap:0}
+  .pipe .pnode{
+    flex:1 1 0;min-width:120px;text-align:center;font-family:var(--mono);font-size:12.5px;
+    border:1px solid var(--hair);background:rgba(255,255,255,.2);padding:14px 10px;
+    display:flex;align-items:center;justify-content:center;line-height:1.3;
+    opacity:0;transform:translateY(10px);transition:opacity .5s,transform .5s}
+  .pipe .parrow{display:flex;align-items:center;color:var(--C);font-family:var(--mono);padding:0 7px;
+    opacity:0;transition:opacity .5s}
+  .pipe.in .pnode{opacity:1;transform:none}
+  .pipe.in .parrow{opacity:1}
+  .pipe.in .pnode:nth-of-type(1){transition-delay:.05s}
+  .pipe.in .parrow:nth-of-type(1){transition-delay:.18s}
+  .pipe.in .pnode:nth-of-type(2){transition-delay:.25s}
+  .pipe.in .parrow:nth-of-type(2){transition-delay:.38s}
+  .pipe.in .pnode:nth-of-type(3){transition-delay:.45s}
+  .pipe.in .parrow:nth-of-type(3){transition-delay:.58s}
+  .pipe.in .pnode:nth-of-type(4){transition-delay:.65s}
+  .pipe.in .parrow:nth-of-type(4){transition-delay:.78s}
+  .pipe.in .pnode:nth-of-type(5){transition-delay:.85s}
+  .pipe.in .parrow:nth-of-type(5){transition-delay:.98s}
+  .pipe.in .pnode:nth-of-type(6){transition-delay:1.05s}
+  .pipe .pnode.bookend{border-color:var(--ink);color:var(--ink);font-weight:600}
+
   /* ---------- SECTION SCAFFOLD ---------- */
   section{padding:84px 0;border-bottom:1px solid var(--hair)}
   .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:46px}
@@ -430,12 +480,16 @@
     .mvl .t{border-right:none;border-bottom:1px solid #3a362f;padding-right:0;padding-bottom:12px;margin-bottom:14px}
     .mvl ol{columns:1}
     .lineage .row{grid-template-columns:1fr;gap:6px}
+    .router .route{grid-template-columns:1fr;gap:10px}
+    .router .route .go{margin-left:0!important}
+    .pipe .pnode{flex:1 1 40%}
     .gatechip{display:none}
     .meta div{border-right:none}
   }
   @media (prefers-reduced-motion:reduce){
     *{animation:none!important;transition:none!important}
     .reveal{opacity:1;transform:none}
+    .pipe .pnode,.pipe .parrow{opacity:1!important;transform:none!important}
   }
 </style>
 </head>
@@ -475,6 +529,52 @@
         <div class="pp b"><span class="k">B</span><span class="tx"><b>Completion</b> <small>coherent product?</small></span></div>
         <div class="pp c"><span class="k">C</span><span class="tx"><b>Hardening</b> <small>safe in production?</small></span></div>
         <div class="gist-gate"><b>Unknown is not pass.</b> Each gate: hard blocker · completion blocker · named deferral.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== START HERE ROUTER + PIPELINE ===================== -->
+  <div class="starthere">
+    <div class="lab reveal">Where do you start?</div>
+    <div class="router reveal d1">
+      <a class="route new" href="#modes">
+        <span class="cond">Starting something <b>new or ambiguous</b></span>
+        <span class="path">
+          <span class="p">A — Foundation</span><span class="ar">→</span>
+          <span class="p">B — Completion</span><span class="ar">→</span>
+          <span class="p">C — Hardening</span>
+          <span class="go" style="margin-left:auto">§09 ↗</span>
+        </span>
+      </a>
+      <a class="route poc" href="#modes">
+        <span class="cond">Hardening an <b>existing POC</b></span>
+        <span class="path">
+          <span class="p">REVIEW</span><span class="ar">→</span>
+          <span class="p">PLAN</span><span class="ar">→</span>
+          <span class="p">HARDEN</span><span class="ar">→</span>
+          <span class="p">OPERATE</span><span class="ar">→</span>
+          <span class="p">CLOSEOUT</span>
+          <span class="go" style="margin-left:auto">§09 ↗</span>
+        </span>
+      </a>
+      <a class="route one" href="#rightsizing">
+        <span class="cond">Just <b>one task</b></span>
+        <span class="path">
+          <span class="p">The minimum viable loop</span>
+          <span class="go" style="margin-left:auto">§08 ↗</span>
+        </span>
+      </a>
+    </div>
+
+    <div class="pipe-wrap reveal d2">
+      <div class="plab">Whichever path — the same pipeline carries the work</div>
+      <div class="pipe">
+        <div class="pnode bookend">Spec / Review</div><span class="parrow">→</span>
+        <div class="pnode">Phase Plan</div><span class="parrow">→</span>
+        <div class="pnode">Slice</div><span class="parrow">→</span>
+        <div class="pnode">Implementation Report</div><span class="parrow">→</span>
+        <div class="pnode">Tracker</div><span class="parrow">→</span>
+        <div class="pnode bookend">Gate / Closeout</div>
       </div>
     </div>
   </div>
@@ -1051,7 +1151,7 @@ none unknown.
       if(e.isIntersecting){ e.target.classList.add('in'); }
     });
   }, {threshold:0.18, rootMargin:'0px 0px -8% 0px'});
-  document.querySelectorAll('.reveal,.principles .p,.track,.layers,.steps .st').forEach(function(el){ io.observe(el); });
+  document.querySelectorAll('.reveal,.principles .p,.track,.layers,.steps .st,.pipe').forEach(function(el){ io.observe(el); });
 
   /* ---- build the slice-loop steps around the circle ---- */
   var loop = document.getElementById('sliceLoop');
