@@ -12,6 +12,20 @@ It combines:
 
 The method is designed for complex software projects where architecture, implementation, and validation evolve together.
 
+## Choose your workflow
+
+Start here — pick your situation:
+
+| Situation | Use |
+|---|---|
+| New or ambiguous build | [Phase A / B / C methodology](docs/methodology.md) |
+| **Existing POC needing production hardening** | **[POC-to-production mode](docs/poc-to-production-mode.md)** |
+| AI-assisted implementation | [Slice prompt](prompts/slice-implementation.prompt.md) + [implementation report](templates/implementation-report.md) |
+| Reviewing a repo before hardening | [POC-to-production repo review prompt](prompts/poc-to-production-repo-review.prompt.md) |
+| Closing a phase | [Phase closeout prompt](prompts/phase-closeout.prompt.md) |
+
+New to the method? The [one-page summary](docs/method-on-a-page.md) or the [visual schematic](docs/workflow.html) are the fastest way in.
+
 ## Why this exists
 
 Modern software delivery often fails in the gap between planning and implementation.
@@ -33,16 +47,6 @@ Build in phases:
 Build each phase through vertical slices:
 
 > A slice is a small, reviewable unit of delivery that produces one coherent system outcome.
-
-## Choose your workflow
-
-| Situation | Use |
-|---|---|
-| New or ambiguous build | [Phase A / B / C methodology](docs/methodology.md) |
-| Existing POC needing production hardening | [POC-to-production mode](docs/poc-to-production-mode.md) |
-| AI-assisted implementation | [Slice prompt](prompts/slice-implementation.prompt.md) + [implementation report](templates/implementation-report.md) |
-| Reviewing a repo before hardening | [POC-to-production repo review prompt](prompts/poc-to-production-repo-review.prompt.md) |
-| Closing a phase | [Phase closeout prompt](prompts/phase-closeout.prompt.md) |
 
 ## Useful for
 
